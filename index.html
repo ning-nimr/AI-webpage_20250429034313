@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>The World of Artificial Intelligence</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --light-gray: #ecf0f1;
+            --dark-gray: #7f8c8d;
+            --white: #ffffff;
+            --black: #000000;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background-color: rgba(52, 152, 219, 0.95);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://scitechdaily.com/images/Artificial-Intelligence-Robot-Thinking-Brain.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: var(--white);
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--white);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .ai-types {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .ai-type {
+            flex: 0 0 48%;
+            margin-bottom: 2rem;
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .ai-type:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .ai-type h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+
+        tr:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .ethical-considerations {
+            background-color: var(--light-gray);
+            padding: 3rem 0;
+        }
+
+        .ethical-item {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ethical-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .ethical-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background-color: var(--accent-color);
+        }
+
+        .ethical-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            padding: 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .tab-container {
+            margin: 2rem 0;
+        }
+
+        .tabs {
+            display: flex;
+            list-style: none;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            color: var(--primary-color);
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 1.5rem;
+            background-color: var(--white);
+            border-radius: 0 0 8px 8px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .accordion {
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        .accordion-item {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background-color: var(--white);
+            padding: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .accordion-header::after {
+            content: '+';
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .accordion-item.active .accordion-header::after {
+            content: '-';
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+
+        .accordion-body {
+            padding: 1.2rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 250px;
+            cursor: pointer;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 900px;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: var(--white);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+                right: auto;
+            }
+            
+            .right {
+                left: 0;
+            }
+
+            .ai-type {
+                flex: 0 0 100%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .footer-section {
+                flex: 0 0 100%;
+                margin-bottom: 2rem;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: 0 0 50%;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .tab {
+                flex: 0 0 100%;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id=\"header\">
+        <div class=\"container\">
+            <nav>
+                <a href=\"#\" class=\"logo\">AI World</a>
+                <ul class=\"nav-links\" id=\"navLinks\">
+                    <li><a href=\"#introduction\">Introduction</a></li>
+                    <li><a href=\"#history\">History</a></li>
+                    <li><a href=\"#types\">Types</a></li>
+                    <li><a href=\"#applications\">Applications</a></li>
+                    <li><a href=\"#ethics\">Ethics</a></li>
+                    <li><a href=\"#gallery\">Gallery</a></li>
+                </ul>
+                <button class=\"hamburger\" id=\"hamburger\">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class=\"hero\" id=\"hero\">
+        <div class=\"container\">
+            <div class=\"hero-content\">
+                <h1>The World of Artificial Intelligence</h1>
+                <p>Exploring the past, present, and future of AI technologies that are reshaping our world</p>
+                <a href=\"#introduction\" class=\"btn\">Learn More</a>
+                <a href=\"https://github.com/ning-nimr/AI-webpage_20250429034313\" target=\"_blank\" class=\"btn btn-outline\">GitHub Repository</a>
+            </div>
+        </div>
+    </section>
+
+    <section id=\"introduction\">
+        <div class=\"container\">
+            <h2 class=\"section-title\">Introduction to AI</h2>
+            <div class=\"grid\">
+                <div class=\"card\">
+                    <img src=\"https://eq47oznpfsr.exactdn.com/wp-content/uploads/2024/08/What-Is-AI-Featured.jpg?lossy=1&quality=70&ssl=1\" alt=\"What is AI\" class=\"card-img\">
+                    <div class=\"card-content\">
+                        <h3 class=\"card-title\">What is Artificial Intelligence?</h3>
+                        <p>Artificial Intelligence (AI) refers to the simulation of human intelligence in machines that are programmed to think and learn like humans. The term may also be applied to any machine that exhibits traits associated with a human mind such as learning and problem-solving.</p>
+                    </div>
+                </div>
+                <div class=\"card\">
+                    <img src=\"https://eq47oznpfsr.exactdn.com/wp-content/uploads/2024/08/AI-Benefits-Blog-Featured.jpg?lossy=1&quality=70&ssl=1\" alt=\"AI Benefits\" class=\"card-img\">
+                    <div class=\"card-content\">
+                        <h3 class=\"card-title\">The Importance of AI</h3>
+                        <p>AI is important because it can help solve complex problems and has the potential to significantly impact various aspects of human life. From healthcare to transportation, AI is revolutionizing industries and creating new possibilities for innovation and efficiency.</p>
+                    </div>
+                </div>
+                <div class=\"card\">
+                    <img src=\"https://cdn.ceps.eu/wp-content/uploads/2024/07/vecteezy_ai-generated-ai-circuit-board-technology-background_37348385-scaled.jpg\" alt=\"AI Technology\" class=\"card-img\">
+                    <div class=\"card-content\">
+                        <h3 class=\"card-title\">AI Technology</h3>
+                        <p>AI technology encompasses various fields including machine learning, neural networks, natural language processing, computer vision, and robotics. These technologies work together to create systems that can perceive their environment, reason about what they observe, and take actions to achieve specific goals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class=\"tab-container\">
+                <ul class=\"tabs\">
+                    <li class=\"tab active\" data-tab=\"definition\">Definition</li>
+                    <li class=\"tab\" data-tab=\"capabilities\">Capabilities</li>
+                    <li class=\"tab\" data-tab=\"limitations\">Limitations</li>
+                    <li class=\"tab\" data-tab=\"future\">Future</li>
+                </ul>
+                <div id=\"definition\" class=\"tab-content active\">
+                    <h3>Definition of AI</h3>
+                    <p>Artificial Intelligence is a branch of computer science that aims to create systems capable of performing tasks that would normally require human intelligence. These tasks include visual perception, speech recognition, decision-making, and translation between languages.</p>
+                    <p>The field was founded on the assumption that human intelligence \"can be so precisely described that a machine can be made to simulate it.\" This raises philosophical questions about the nature of the mind and the ethics of creating artificial beings with human-like intelligence.</p>
+                </div>
+                <div id=\"capabilities\" class=\"tab-content\">
+                    <h3>AI Capabilities</h3>
+                    <p>Modern AI systems can perform a wide range of tasks:</p>
+                    <ul>
+                        <li>Natural Language Processing: Understanding and generating human language</li>
+                        <li>Computer Vision: Interpreting and understanding visual information from the world</li>
+                        <li>Pattern Recognition: Identifying patterns in complex datasets</li>
+                        <li>Problem Solving: Finding solutions to complex problems</li>
+                        <li>Learning: Improving performance based on experience</li>
+                        <li>Planning: Creating sequences of actions to achieve goals</li>
+                    </ul>
+                </div>
+                <div id=\"limitations\" class=\"tab-content\">
+                    <h3>Current Limitations</h3>
+                    <p>Despite remarkable progress, AI still faces significant limitations:</p>
+                    <ul>
+                        <li>Lack of Common Sense: AI systems struggle with basic understanding that humans take for granted</li>
+                        <li>Contextual Understanding: Difficulty in understanding context and nuance</li>
+                        <li>Creativity: Limited ability to truly create novel ideas or concepts</li>
+                        <li>Emotional Intelligence: Inability to truly understand or experience emotions</li>
+                        <li>Explainability: Many AI systems function as \"black boxes\" where decisions cannot be easily explained</li>
+                        <li>Data Dependency: Performance heavily relies on the quality and quantity of training data</li>
+                    </ul>
+                </div>
+                <div id=\"future\" class=\"tab-content\">
+                    <h3>The Future of AI</h3>
+                    <p>The future of AI is likely to include:</p>
+                    <ul>
+                        <li>General AI: Systems that can perform any intellectual task that a human can</li>
+                        <li>Enhanced Human-AI Collaboration: More natural and intuitive interfaces between humans and AI</li>
+                        <li>Embedded AI: AI systems integrated into everyday objects and environments</li>
+                        <li>Ethical AI: Systems designed with built-in ethical considerations</li>
+                        <li>Self-Improving AI: Systems that can improve their own algorithms</li>
+                        <li>Quantum AI: AI leveraging quantum computing for unprecedented computational power</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id=\"history\" style=\"background-color: var(--light-gray);\">
+        <div class=\"container\">
+            <h2 class=\"section-title\">History of AI</h2>
+            <div class=\"timeline\">
+                <div class=\"timeline-item left\">
+                    <div class=\"timeline-content\">
+                        <h3>1940s-1950s: The Birth of AI</h3>
+                        <p>The concept of AI emerged in the 1940s and 1950s with the development of early computers. The term \"Artificial Intelligence\" was coined at the Dartmouth Conference in 1956, which is widely considered the founding event of AI as a field.</p>
+                    </div>
+                </div>
+                <div class=\"timeline-item right\">
+                    <div class=\"timeline-content\">
+                        <h3>1960s-1970s: Early Developments</h3>
+                        <p>The 1960s and 1970s saw significant progress in AI research, with the development of expert systems and early neural networks. However, limitations in computing power and algorithm design led to what would later be called the \"AI Winter.\"</p>
+                    </div>
+                </div>
+                <div class=\"timeline-item left\">
+                    <div class=\"timeline-content\">
+                        <h3>1980s-1990s: Expert Systems</h3>
+                        <p>The 1980s saw a resurgence of interest in AI with the development of expert systems, which could mimic the decision-making ability of human experts in specific domains. However, another \"AI Winter\" occurred in the late 1980s and early 1990s.</p>
+                    </div>
+                </div>
+                <div class=\"timeline-item right\">
+                    <div class=\"timeline-content\">
+                        <h3>2000s: Machine Learning Revolution</h3>
+                        <p>The early 2000s saw the rise of machine learning approaches, particularly with the development of more sophisticated neural networks. This period also saw AI applications in various domains, including speech recognition and computer vision.</p>
+                    </div>
+                </div>
+                <div class=\"timeline-item left\">
+                    <div class=\"timeline-content\">
+                        <h3>2010s: Deep Learning Breakthrough</h3>
+                        <p>The 2010s witnessed the deep learning revolution, with breakthroughs in neural networks leading to significant advances in image recognition, natural language processing, and game playing. AlphaGo's victory over the world champion in Go marked a milestone in AI development.</p>
+                    </div>
+                </div>
+                <div class=\"timeline-item right\">
+                    <div class=\"timeline-content\">
+                        <h3>2020s: AI Goes Mainstream</h3>
+                        <p>The current decade has seen AI become increasingly integrated into everyday life, with applications ranging from virtual assistants to autonomous vehicles. Large language models like GPT and generative AI have demonstrated unprecedented capabilities in understanding and generating human-like text and images.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class=\"chart-container\">
+                <canvas id=\"aiMilestonesChart\"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section id=\"types\">
+        <div class=\"container\">
+            <h2 class=\"section-title\">Types of AI</h2>
+            <p class=\"section-description\">AI can be categorized in several ways, including by capability and by functionality. Here are the main types of AI systems:</p>
+            
+            <div class=\"ai-types\">
+                <div class=\"ai-type\">
+                    <h3>Narrow AI (Weak AI)</h3>
+                    <p>Narrow AI is designed to perform a specific task, such as voice recognition or facial recognition. Most current AI systems are narrow AI. Examples include virtual assistants like Siri and Alexa, recommendation systems, and spam filters.</p>
+                </div>
+                <div class=\"ai-type\">
+                    <h3>General AI (Strong AI)</h3>
+                    <p>General AI refers to systems that possess the ability to understand, learn, and apply knowledge across a wide range of tasks at a level equal to or exceeding human capabilities. This type of AI does not yet exist but remains a goal of many researchers.</p>
+                </div>
+                
+</body>
+</html>
